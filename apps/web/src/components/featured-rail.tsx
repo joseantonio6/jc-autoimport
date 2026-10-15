@@ -9,6 +9,7 @@ import { ArrowUpRight } from 'lucide-react';
 import type { VehicleCard } from '@/lib/api';
 import { LABELS } from '@/lib/labels';
 import { formatMileage, formatPrice } from '@/lib/utils';
+import { FavoriteButton } from './favorite-button';
 
 /** Seconds a card takes to cross the viewport. Fixed, so the perceived speed does
  *  not change with the number of units. */
@@ -257,7 +258,7 @@ function RailCard({ vehicle, tabbable = true }: { vehicle: VehicleCard; tabbable
   const image = vehicle.primaryImageUrl ?? vehicle.thumbnailUrl ?? vehicle.media?.[0]?.url ?? null;
 
   return (
-    <article className="w-[80vw] max-w-[24rem] sm:w-[24rem]">
+    <article className="relative w-[80vw] max-w-[24rem] sm:w-[24rem]">
       <Link
         href={`/vehiculo/${vehicle.slug}`}
         data-cursor="Ver"
@@ -301,6 +302,9 @@ function RailCard({ vehicle, tabbable = true }: { vehicle: VehicleCard; tabbable
           <span>{formatMileage(vehicle.mileage)}</span>
         </div>
       </Link>
+      {tabbable ? (
+        <FavoriteButton vehicle={vehicle} className="absolute top-3 right-3" />
+      ) : null}
     </article>
   );
 }

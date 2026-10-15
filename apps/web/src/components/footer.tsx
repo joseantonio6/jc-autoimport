@@ -8,6 +8,7 @@ const columns = [
     links: [
       { href: '/', label: 'Inicio' },
       { href: '/catalogo', label: 'Catálogo' },
+      { href: '/recomendaciones', label: 'Recomendaciones por perfil' },
       { href: '/proceso', label: 'Proceso de importación' },
       { href: '/contacto', label: 'Contacto' },
     ],
@@ -19,6 +20,7 @@ const columns = [
       { href: '/catalogo?fuelType=HYBRID', label: 'Híbridos e híbridos enchufables' },
       { href: '/catalogo?bodyType=SUV', label: 'SUV y camionetas' },
       { href: '/catalogo?priceMax=30000', label: 'Desde $30,000' },
+      { href: '/favoritos', label: 'Mis favoritos' },
     ],
   },
 ];

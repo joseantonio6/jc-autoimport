@@ -228,6 +228,24 @@ export const api = {
     source?: string;
   }) => request<{ id: string }>('/api/v1/leads', { method: 'POST', body: JSON.stringify(body) }),
 
+  // Favoritos persistidos en el servidor (requieren sesión). El proxy `/backend`
+  // reenvía la cookie httpOnly, así que el navegador nunca ve un token.
+  favorites: () => request<VehicleCard[]>('/api/v1/favorites'),
+
+  favoriteIds: () => request<string[]>('/api/v1/favorites/ids'),
+
+  addFavorite: (vehicleId: string) =>
+    request<{ id: string; vehicleId: string }>('/api/v1/favorites', {
+      method: 'POST',
+      body: JSON.stringify({ vehicleId }),
+    }),
+
+  removeFavorite: (vehicleId: string) =>
+    request<{ success: boolean }>(`/api/v1/favorites/${vehicleId}`, { method: 'DELETE' }),
+
+  clearFavorites: () =>
+    request<{ success: boolean; removed: number }>('/api/v1/favorites', { method: 'DELETE' }),
+
   login: (body: { email: string; password: string }) =>
     request<{
       user?: { id: string; email: string; role: string; firstName: string | null; lastName: string | null; emailVerified: boolean };

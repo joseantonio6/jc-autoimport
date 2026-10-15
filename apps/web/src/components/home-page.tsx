@@ -10,6 +10,7 @@ import { Counter, Magnetic, Reveal, SectionLabel, SplitWords } from '@/component
 import { SearchBar } from '@/components/search-bar';
 import { HeroVideo } from '@/components/hero-video';
 import { FeaturedRail } from '@/components/featured-rail';
+import { RecommendationTeaser } from '@/components/recommendation-table';
 
 const BRANDS = [
   'Porsche', 'Mercedes-Benz', 'BMW', 'Audi', 'Tesla', 'Toyota',
@@ -300,6 +301,36 @@ export function HomePage({ initialFeatured }: { initialFeatured: VehicleCard[] }
           ) : (
             <FeaturedRail vehicles={featured} />
           )}
+        </div>
+      </section>
+
+      {/* ============================== RECOMENDACIONES ============================== */}
+      <section className="border-b border-line py-20 lg:py-28">
+        <div className="container-x">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <SectionLabel>Según tu perfil</SectionLabel>
+              <h2 className="mt-5 max-w-[16ch] font-display text-[clamp(2rem,5vw,4.2rem)] leading-[0.9] text-smoke">
+                ¿Qué auto <span className="text-signal">necesitas?</span>
+              </h2>
+            </div>
+            <Reveal delay={0.15}>
+              <Link
+                href="/recomendaciones"
+                className="group inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.24em] text-smoke uppercase transition-colors hover:text-signal"
+              >
+                Ver la tabla completa
+                <ArrowRight
+                  className="size-4 transition-transform duration-500 group-hover:translate-x-1.5"
+                  strokeWidth={1.6}
+                />
+              </Link>
+            </Reveal>
+          </div>
+
+          <div className="mt-12">
+            <RecommendationTeaser />
+          </div>
         </div>
       </section>
 

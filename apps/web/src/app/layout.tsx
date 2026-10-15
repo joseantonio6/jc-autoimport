@@ -5,6 +5,7 @@ import './globals.css';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { CustomCursor } from '@/components/motion';
+import { FavoritesProvider } from '@/lib/favorites';
 import { THEME_STORAGE_KEY } from '@/lib/theme';
 import { SITE_URL } from '@/lib/site';
 
@@ -72,10 +73,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="antialiased">
-        <CustomCursor />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <FavoritesProvider>
+          <CustomCursor />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </FavoritesProvider>
       </body>
     </html>
   );

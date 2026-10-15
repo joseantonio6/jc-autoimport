@@ -3,14 +3,16 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, Phone, UserRound, X } from 'lucide-react';
+import { Heart, Menu, Phone, UserRound, X } from 'lucide-react';
 import { CONTACT_PHONE_HREF } from '@/lib/site';
+import { useFavorites } from '@/lib/favorites';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
 
 const links = [
   { href: '/', label: 'Inicio' },
   { href: '/catalogo', label: 'Catálogo' },
+  { href: '/recomendaciones', label: 'Recomendaciones' },
   { href: '/proceso', label: 'Proceso' },
   { href: '/contacto', label: 'Contacto' },
 ];
@@ -19,6 +21,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [path, setPath] = useState('');
+  const { count, ready } = useFavorites();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -74,6 +77,19 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/favoritos"
+              aria-label="Mis favoritos"
+              title="Mis favoritos"
+              className="relative hidden size-10 items-center justify-center border border-line text-smoke transition-colors duration-300 hover:border-signal hover:text-signal sm:flex"
+            >
+              <Heart className="size-4" strokeWidth={1.8} />
+              {ready && count > 0 ? (
+                <span className="absolute -top-2 -right-2 flex size-4 items-center justify-center bg-signal text-[9px] font-bold text-ink">
+                  {count > 9 ? '9+' : count}
+                </span>
+              ) : null}
+            </Link>
             <Link
               href="/cuenta"
               aria-label="Área de cliente"
@@ -139,6 +155,14 @@ export function Navbar() {
                 <Phone className="size-4 text-signal" />
                 {CONTACT_PHONE_HREF}
               </a>
+              <Link
+                href="/favoritos"
+                onClick={() => setOpen(false)}
+                className="mt-6 flex items-center gap-2 text-sm font-semibold tracking-[0.2em] text-signal uppercase"
+              >
+                <Heart className="size-4" />
+                Favoritos{ready && count > 0 ? ` (${count})` : ''}
+              </Link>
               <Link
                 href="/cuenta"
                 onClick={() => setOpen(false)}

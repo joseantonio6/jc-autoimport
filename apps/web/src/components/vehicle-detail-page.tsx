@@ -24,6 +24,7 @@ import { cn, discountPct, formatMileage, formatPrice } from '@/lib/utils';
 import { Button, Eyebrow, StatusBadge } from './ui';
 import { Reveal, SplitWords } from './motion';
 import { LeadForm } from './lead-form';
+import { FavoriteButton } from './favorite-button';
 import { VehiclePhoto } from './vehicle-photo';
 
 const FUEL_ICON: Record<string, typeof Fuel> = {
@@ -237,6 +238,11 @@ export function VehicleDetailPage({ vehicle }: { vehicle: VehicleDetail }) {
                   vehicleName={`${vehicle.brand} ${vehicle.model}`}
                   defaultType="QUOTATION"
                   cta="Reservar este vehículo"
+                />
+                <FavoriteButton
+                  vehicle={vehicle}
+                  variant="full"
+                  className="w-full justify-center"
                 />
                 <Button href="/contacto" variant="outline" className="w-full">
                   Agendar prueba de manejo

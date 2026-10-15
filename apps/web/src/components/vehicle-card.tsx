@@ -8,6 +8,7 @@ import { LABELS } from '@/lib/labels';
 import { cn, discountPct, formatMileage, formatPrice } from '@/lib/utils';
 import { StatusBadge } from './ui';
 import { VehiclePhoto } from './vehicle-photo';
+import { FavoriteButton } from './favorite-button';
 
 export function VehicleCardItem({
   vehicle,
@@ -164,6 +165,7 @@ export function VehicleCardItem({
         </div>
         )}
       </Link>
+      <FavoriteButton vehicle={vehicle} className="absolute top-3 right-3" />
     </motion.article>
   );
 }
@@ -217,11 +219,12 @@ export function VehicleRow({
       transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.3), ease: [0.16, 1, 0.3, 1] }}
       className="group relative border-b border-line"
     >
-      <Link
-        href={`/vehiculo/${vehicle.slug}`}
-        data-cursor="Ver"
-        className="flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:gap-8"
-      >
+      <div className="flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:gap-8">
+        <Link
+          href={`/vehiculo/${vehicle.slug}`}
+          data-cursor="Ver"
+          className="flex flex-1 flex-col gap-5 sm:flex-row sm:items-center sm:gap-8"
+        >
         <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-ink-3 sm:w-56">
           <VehiclePhoto
             src={image}
@@ -285,7 +288,9 @@ export function VehicleRow({
             </span>
           </div>
         </div>
-      </Link>
+        </Link>
+        <FavoriteButton vehicle={vehicle} className="shrink-0 self-start sm:self-center" />
+      </div>
     </motion.article>
   );
 }

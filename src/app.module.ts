@@ -10,6 +10,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module.js';
 import { SearchModule } from './modules/search/search.module.js';
 import { MediaModule } from './modules/media/media.module.js';
 import { LeadsModule } from './modules/leads/leads.module.js';
+import { FavoritesModule } from './modules/favorites/favorites.module.js';
 import { PaymentsModule } from './modules/payments/payments.module.js';
 import { AuditModule } from './modules/audit/audit.module.js';
 import { HealthModule } from './modules/health/health.module.js';
@@ -42,6 +43,7 @@ const globalProviders: Provider[] = [
     SearchModule,
     MediaModule,
     LeadsModule,
+    FavoritesModule,
     PaymentsModule,
     AuditModule,
     HealthModule,

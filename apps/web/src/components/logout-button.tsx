@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Loader2, LogOut } from 'lucide-react';
 import { api } from '@/lib/api';
+import { notifyAuthChanged } from '@/lib/favorites';
 
 export function LogoutButton() {
   const router = useRouter();
@@ -16,6 +17,8 @@ export function LogoutButton() {
     } catch {
       /* la cookie se limpia igual en el proxy */
     }
+    // Vuelve al modo invitado: el proveedor recarga desde `localStorage`.
+    notifyAuthChanged();
     router.push('/');
     router.refresh();
   }

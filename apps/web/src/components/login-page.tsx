@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2, Lock, Mail, ShieldCheck } from 'lucide-react';
 import { api } from '@/lib/api';
+import { notifyAuthChanged } from '@/lib/favorites';
 import { Eyebrow } from './ui';
 import { Reveal } from './motion';
 
@@ -20,6 +21,9 @@ export function LoginPage() {
 
   // El backend deja la sesión en cookies httpOnly; aqui no se guarda nada.
   function goHome() {
+    // Avisa al proveedor de favoritos para que traiga los de la cuenta y
+    // fusione los que hubiera guardado como invitado.
+    notifyAuthChanged();
     router.push('/cuenta');
     router.refresh();
   }
